@@ -5,13 +5,14 @@ import { useToast } from "@/components/ui/use-toast";
 import { LoginFormInterface, LoginFormOTPInterface } from "@/utils/authTypes";
 import axios from "axios";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 
 const FormOtp: React.FC = () => {
   const { toast } = useToast();
+  const router = useRouter();
 
   const initialRegisterOtpForm = {
     one: "",
@@ -82,7 +83,7 @@ const FormOtp: React.FC = () => {
             localStorage.setItem("x_access_token", res.data.x_access_token);
           } catch (error) {}
           getProfileHandler(res.data.x_access_token);
-          redirect("/dashboard");
+          router.push("/dashboard");
         }
       })
       .catch(() => {
