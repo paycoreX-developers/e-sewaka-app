@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,7 +44,12 @@ const ProfileSidebar: React.FC = () => {
       .then((res) => {
         if (res.status == 200) {
           //set on LocalStorage
-
+          try {
+            window.localStorage.setItem("profile", "");
+            window.localStorage.setItem("x_access_token", "");
+            window.localStorage.setItem("uuid", "");
+            window.localStorage.setItem("phone", "");
+          } catch (error) {}
           //set on useContext
 
           setProfile({});

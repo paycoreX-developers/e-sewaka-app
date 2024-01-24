@@ -39,10 +39,12 @@ const AuthContextProvider = ({ children }: RootLayoutProps) => {
     try {
       let uuid__ = window.localStorage.getItem("uuid") || "";
       let token__ = window.localStorage.getItem("x_access_token") || "";
+      let profile__ = window.localStorage.getItem("profile") || "";
 
       if (uuid__ || token__) {
         setUuid(uuid__);
         setToken(token__);
+        setProfile(JSON.parse(profile__));
       } else {
       }
     } catch (error) {

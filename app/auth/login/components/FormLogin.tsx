@@ -105,7 +105,7 @@ const FormLogin = () => {
                       href="/auth/register"
                       className="text-blue-700 font-semibold"
                     >
-                      Sign up{" "}
+                      Register{" "}
                     </Link>
                   </div>
                 </div>
