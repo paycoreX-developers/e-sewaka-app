@@ -5,6 +5,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { LoginFormInterface, LoginFormOTPInterface } from "@/utils/authTypes";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import axios from "axios";
+import Image from "next/image";
+import { redirect } from 'next/navigation'
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
@@ -83,6 +85,7 @@ const FormOtp: React.FC = () => {
         } else {
           setxAccessToken(res.data.x_access_token);
           getProfileHandler(res.data.x_access_token);
+          redirect("/dashboard")
         }
       })
       .catch(() => {
@@ -135,9 +138,12 @@ const FormOtp: React.FC = () => {
     >
       <Form>
         <div className="w-full grid place-content-center 2xl:mt-3">
-          <img
-            src="/assets/auth/otp_illus.png"
+          <Image
+            src="/assets/otp_illustration.png"
             alt=""
+            width={0}
+            height={0}
+            sizes="100%"
             className="w-auto h-[140px] 2xl:h-[180px]"
           />
         </div>
@@ -148,7 +154,7 @@ const FormOtp: React.FC = () => {
           <div className="flex max-w-full justify-between gap-3">
             <Field
               className="border-[1px] border-neutral-400 active:border-neutral-100 font-bold text-h5 placeholder:text-normal placeholder:font-normal
-				text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-10  rounded-lg aspect-square text-center"
+				  text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-14 rounded-lg aspect-square text-center"
               min="0"
               max="9"
               type="number"
@@ -158,7 +164,7 @@ const FormOtp: React.FC = () => {
             />
             <Field
               className="border-[1px] border-neutral-400 active:border-neutral-100 font-bold text-h5 placeholder:text-normal placeholder:font-normal
-				text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-10  rounded-lg aspect-square text-center"
+				  text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-14 rounded-lg aspect-square text-center"
               min="0"
               max="9"
               type="number"
@@ -168,7 +174,7 @@ const FormOtp: React.FC = () => {
             />
             <Field
               className="border-[1px] border-neutral-400 active:border-neutral-100 font-bold text-h5 placeholder:text-normal placeholder:font-normal
-				text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-10  rounded-lg aspect-square text-center"
+				  text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-14 rounded-lg aspect-square text-center"
               min="0"
               max="9"
               type="number"
@@ -178,7 +184,7 @@ const FormOtp: React.FC = () => {
             />
             <Field
               className="border-[1px] border-neutral-400 active:border-neutral-100 font-bold text-h5 placeholder:text-normal placeholder:font-normal
-				text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-10  rounded-lg aspect-square text-center"
+				  text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-14 rounded-lg aspect-square text-center"
               min="0"
               max="9"
               type="number"
@@ -189,7 +195,7 @@ const FormOtp: React.FC = () => {
 
             <Field
               className="border-[1px] border-neutral-400 active:border-neutral-100 font-bold text-h5 placeholder:text-normal placeholder:font-normal
-				text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-10  rounded-lg aspect-square text-center"
+				  text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-14 rounded-lg aspect-square text-center"
               min="0"
               max="9"
               type="number"
@@ -199,7 +205,7 @@ const FormOtp: React.FC = () => {
             />
             <Field
               className="border-[1px] border-neutral-400 active:border-neutral-100 font-bold text-h5 placeholder:text-normal placeholder:font-normal
-				text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-10  rounded-lg aspect-square text-center"
+				  text-primary-500 placeholder:text-neutral-500 px-4 py-1 w-14 rounded-lg aspect-square text-center"
               min="0"
               max="9"
               type="number"

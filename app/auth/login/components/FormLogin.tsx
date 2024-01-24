@@ -58,9 +58,11 @@ const FormLogin = () => {
     <div className="text-center">
       <h1 className="lg:text-h5 font-bold">Log in to your account</h1>
       <p className="lg:text-b2 text-gray-400">
-        Welcome back! Please enter your details
+        {toOtp
+          ? "We’ve sent a code to your Whatsapp"
+          : "Welcome back! Please enter your  details"}
       </p>
-      {!toOtp ? (
+      {toOtp ? (
         <FormOtp />
       ) : (
         <div className="text-start mt-10">
@@ -76,7 +78,7 @@ const FormLogin = () => {
                     Phone number
                   </label>
                   <div className="relative">
-                    <div className="absolute bg-neutral-300 py-2 pl-4 pr-3 rounded-l-full">
+                    <div className="absolute -translate-y-1/2 top-1/2 bg-neutral-300 border-2 py-2 pl-4 pr-3 rounded-l-full">
                       +62
                     </div>
                     <Field
@@ -100,7 +102,7 @@ const FormLogin = () => {
                   <div className="text-neutral-400 text-center mt-5">
                     Don’t have an account?{" "}
                     <Link
-                      href="/register"
+                      href="/auth/register"
                       className="text-blue-700 font-semibold"
                     >
                       Sign up{" "}
