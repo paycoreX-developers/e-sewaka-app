@@ -11,7 +11,7 @@ export default function page() {
           height={0}
           sizes="100%"
           src={"/assets/logo/Logo_BSM_colored.png"}
-          className="w-1/3"
+          className="w-1/3 mb-5"
         />
       </div>
       <FormLogin />
