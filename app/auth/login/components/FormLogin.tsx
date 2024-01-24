@@ -7,13 +7,13 @@ import { Field, Form, Formik } from "formik";
 import Link from "next/link";
 import React, { useId, useState } from "react";
 import * as Yup from "yup";
-import { useLocalStorage } from "@uidotdev/usehooks";
+// import { useLocalStorage } from "@uidotdev/usehooks";
 import FormOtp from "./FormOtp";
 
 const FormLogin = () => {
   const [toOtp, setToOtp] = useState<boolean>(false);
-  const [phonePresist, setPhonePresist] = useLocalStorage<string>("phone", "");
-  const [uuidPresist, setuuidPresist] = useLocalStorage<string>("uuid", "");
+  // const [phonePresist, setPhonePresist] = useLocalStorage<string>("phone", "");
+  // const [uuidPresist, setuuidPresist] = useLocalStorage<string>("uuid", "");
 
   // Validation
   const Login = Yup.object().shape({
@@ -42,12 +42,12 @@ const FormLogin = () => {
     })
       .then((res) => {
         if (res.status !== 200) {
-          setPhonePresist("");
-          setuuidPresist("");
           setToOtp(false);
         } else {
-          setPhonePresist(payload.phone);
-          setuuidPresist(payload.uuid as string);
+          try {
+            localStorage.setItem("uuid", id);
+            localStorage.setItem("phone", payload.phone);
+          } catch (error) {}
           setToOtp(true);
         }
       })

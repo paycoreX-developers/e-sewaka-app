@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
+import { AuthContextProvider } from "./authContext";
 
 const inter = Plus_Jakarta_Sans({ subsets: ["latin"] });
 
@@ -18,8 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
-        <Toaster />
+        <AuthContextProvider>
+          <>
+            {children}
+            <Toaster />
+          </>
+        </AuthContextProvider>
       </body>
     </html>
   );
