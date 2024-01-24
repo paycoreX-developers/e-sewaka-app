@@ -3,24 +3,16 @@
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { LoginFormInterface, LoginFormOTPInterface } from "@/utils/authTypes";
-import { useLocalStorage } from "@uidotdev/usehooks";
 import axios from "axios";
 import Image from "next/image";
-import { redirect } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 
 const FormOtp: React.FC = () => {
   const { toast } = useToast();
-
-  const [phone, setPhone] = useLocalStorage<string>("phone", "");
-  const [uuidPresist, setuuidPresist] = useLocalStorage<string>("uuid", "");
-  const [xAccessToken, setxAccessToken] = useLocalStorage<string>(
-    "x_access_token",
-    ""
-  );
-  const [profilePressit, setProfilePressit] = useLocalStorage("user_data");
+  const router = useRouter();
 
   const initialRegisterOtpForm = {
     one: "",
@@ -42,7 +34,7 @@ const FormOtp: React.FC = () => {
 
   //Handler get Profile
   const getProfileHandler = async (token: string) => {
-    let payload = { uuid: uuidPresist };
+    let payload = { uuid: "asd" };
     await axios({
       url: "/api/apps/users/profile",
       method: "POST",
@@ -52,7 +44,9 @@ const FormOtp: React.FC = () => {
       data: JSON.stringify(payload),
     })
       .then((res) => {
-        setProfilePressit(JSON.stringify(res.data));
+        try {
+          localStorage.setItem("profile", JSON.stringify(res.data));
+        } catch (error) {}
       })
       .catch(() => {
         toast({
@@ -68,8 +62,8 @@ const FormOtp: React.FC = () => {
 
     // Init Payload Otp
     let payloadRegister: LoginFormOTPInterface = {
-      uuid: uuidPresist,
-      phone: phone,
+      uuid: "asd",
+      phone: "6285738719488",
       code: generatePayloadOtp,
     };
     await axios({
@@ -79,13 +73,17 @@ const FormOtp: React.FC = () => {
     })
       .then((res) => {
         if (res.status !== 200) {
-          setPhone("");
-          setuuidPresist("");
-          setxAccessToken("");
+          try {
+            localStorage.setItem("uuid", "");
+            localStorage.setItem("phone", "");
+            localStorage.setItem("x_access_token", "");
+          } catch (error) {}
         } else {
-          setxAccessToken(res.data.x_access_token);
+          try {
+            localStorage.setItem("x_access_token", res.data.x_access_token);
+          } catch (error) {}
           getProfileHandler(res.data.x_access_token);
-          redirect("/dashboard")
+          router.push("/dashboard");
         }
       })
       .catch(() => {
@@ -99,8 +97,8 @@ const FormOtp: React.FC = () => {
 
   const resendOtp = async () => {
     let payload: LoginFormInterface = {
-      uuid: uuidPresist,
-      phone: phone,
+      uuid: "asd",
+      phone: "6285738719488",
       via: "whatsapp",
     };
 
