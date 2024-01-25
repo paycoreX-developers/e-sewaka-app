@@ -14,7 +14,6 @@ import { useAuth } from "@/app/authContext";
 const FormOtp: React.FC = () => {
   const { toast } = useToast();
   const router = useRouter();
-  const { uuid, phone } = useAuth();
 
   const initialRegisterOtpForm = {
     one: "",
@@ -36,7 +35,7 @@ const FormOtp: React.FC = () => {
 
   //Handler get Profile
   const getProfileHandler = async (token: string) => {
-    let payload = { uuid: uuid };
+    let payload = { uuid: window.localStorage.getItem("uuid") || "" };
     await axios({
       url: "/api/apps/users/profile",
       method: "POST",
@@ -65,8 +64,8 @@ const FormOtp: React.FC = () => {
 
     // Init Payload Otp
     let payloadRegister: LoginFormOTPInterface = {
-      uuid: uuid,
-      phone: phone,
+      uuid: window.localStorage.getItem("uuid") || "",
+      phone: window.localStorage.getItem("phone") || "",
       code: generatePayloadOtp,
     };
     await axios({
@@ -103,8 +102,8 @@ const FormOtp: React.FC = () => {
   //   Handler resendOTP
   const resendOtp = async () => {
     let payload: LoginFormInterface = {
-      uuid: uuid,
-      phone: "6285738719488",
+      uuid: window.localStorage.getItem("uuid") || "",
+      phone: window.localStorage.getItem("phone") || "",
       via: "whatsapp",
     };
 
