@@ -1,16 +1,14 @@
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { sessionStatus } from "./lib/session";
+import { NextRequest, NextResponse } from "next/server";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
+const protectedRoutes = ["/dashboard"];
 
-//   if (!request.headers.localStorage) {
-//     return NextResponse.redirect(new URL("/auth/login", request.url));
-//   }
+export default function middleware(req: NextRequest) {
+
+    let verify = req.cookies.get("token")
+
+  if (!verify && protectedRoutes.includes(req.nextUrl.pathname)) {
+    const absoluteUrl = new URL("/", req.nextUrl.origin);
+    return NextResponse.redirect(absoluteUrl.toString());
+  }
 }
-
-// See "Matching Paths" below to learn more
-export const config = {
-  matcher: [""],
-};
