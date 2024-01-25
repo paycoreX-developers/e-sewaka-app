@@ -82,7 +82,7 @@ const FormOtp: React.FC = () => {
           try {
             localStorage.setItem("x_access_token", res.data.x_access_token);
             // set token on local
-            document.cookie = `token=${res.data.x_access_token};path="/"`;
+            document.cookie = `token=${res.data.x_access_token};path="/dashboard"`;
           } catch (error) {}
           getProfileHandler(res.data.x_access_token);
           router.push("/dashboard");
