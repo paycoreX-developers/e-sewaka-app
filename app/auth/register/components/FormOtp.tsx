@@ -5,10 +5,10 @@ import { useToast } from "@/components/ui/use-toast";
 import { LoginFormInterface, LoginFormOTPInterface } from "@/utils/authTypes";
 import axios from "axios";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+import React from "react";
 import * as Yup from "yup";
+import { useAuth } from "@/app/authContext";
 
 type Props = {
   setToPin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,7 +16,7 @@ type Props = {
 
 const FormOtp: React.FC<Props> = ({ setToPin }) => {
   const { toast } = useToast();
-  const router = useRouter();
+  const { uuid } = useAuth();
 
   const initialRegisterOtpForm = {
     one: "",
@@ -60,14 +60,15 @@ const FormOtp: React.FC<Props> = ({ setToPin }) => {
   };
 
   const verifyOtpHandler = async (otp: any) => {
+    console.log(uuid);
     // Read FormOtp and Generate to single string
     const _otp = Object.values(otp);
     const generatePayloadOtp = _otp.join("");
 
     // Init Payload Otp
     let payloadRegister: LoginFormOTPInterface = {
-      uuid: "asd",
-      phone: "6285738719488",
+      uuid: uuid,
+      phone: localStorage.getItem("phone") || ("" as string),
       code: generatePayloadOtp,
     };
     await axios({
@@ -86,9 +87,8 @@ const FormOtp: React.FC<Props> = ({ setToPin }) => {
           try {
             setToPin(true);
             localStorage.setItem("x_access_token", res.data.x_access_token);
+            getProfileHandler(res.data.x_access_token);
           } catch (error) {}
-          getProfileHandler(res.data.x_access_token);
-          router.push("/dashboard");
         }
       })
       .catch(() => {
@@ -102,8 +102,8 @@ const FormOtp: React.FC<Props> = ({ setToPin }) => {
 
   const resendOtp = async () => {
     let payload: LoginFormInterface = {
-      uuid: "asd",
-      phone: "6285738719488",
+      uuid: uuid,
+      phone: localStorage.getItem("phone") || ("" as string),
       via: "whatsapp",
     };
 

@@ -9,10 +9,12 @@ import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
+import { useAuth } from "@/app/authContext";
 
 const FormOtp: React.FC = () => {
   const { toast } = useToast();
   const router = useRouter();
+  const { uuid, phone } = useAuth();
 
   const initialRegisterOtpForm = {
     one: "",
@@ -34,7 +36,7 @@ const FormOtp: React.FC = () => {
 
   //Handler get Profile
   const getProfileHandler = async (token: string) => {
-    let payload = { uuid: "asd" };
+    let payload = { uuid: uuid };
     await axios({
       url: "/api/apps/users/profile",
       method: "POST",
@@ -55,6 +57,7 @@ const FormOtp: React.FC = () => {
       });
   };
 
+  //   Handler for send and verify OTP
   const verifyOtpHandler = async (otp: any) => {
     // Read FormOtp and Generate to single string
     const _otp = Object.values(otp);
@@ -62,8 +65,8 @@ const FormOtp: React.FC = () => {
 
     // Init Payload Otp
     let payloadRegister: LoginFormOTPInterface = {
-      uuid: "asd",
-      phone: "6285738719488",
+      uuid: uuid,
+      phone: phone,
       code: generatePayloadOtp,
     };
     await axios({
@@ -97,9 +100,10 @@ const FormOtp: React.FC = () => {
       });
   };
 
+  //   Handler resendOTP
   const resendOtp = async () => {
     let payload: LoginFormInterface = {
-      uuid: "asd",
+      uuid: uuid,
       phone: "6285738719488",
       via: "whatsapp",
     };
@@ -229,7 +233,6 @@ const FormOtp: React.FC = () => {
             // disabled={loading}
             className="w-full bg-blue-700 text-white py-2 px-4 rounded-full"
           >
-            {/* {loading ? "Loading" : "Verify"} */}
             Verify
           </Button>
         </div>

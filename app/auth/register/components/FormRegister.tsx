@@ -1,10 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { LoginFormInterface, RegisterFormInterface } from "@/utils/authTypes";
+import { RegisterFormInterface } from "@/utils/authTypes";
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
-import Link from "next/link";
 import React, { useId, useState } from "react";
 import * as Yup from "yup";
 import FormOtp from "./FormOtp";
