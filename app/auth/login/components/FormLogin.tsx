@@ -9,6 +9,7 @@ import React, { useId, useState } from "react";
 import * as Yup from "yup";
 // import { useLocalStorage } from "@uidotdev/usehooks";
 import FormOtp from "./FormOtp";
+import { cookies } from "next/headers";
 
 const FormLogin = () => {
   const [toOtp, setToOtp] = useState<boolean>(false);

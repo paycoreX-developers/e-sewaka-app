@@ -6,7 +6,7 @@ type Props = {};
 
 const TopCard: React.FC = ({}: Props) => {
   const { profile } = useAuth();
-  console.log(profile);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 place-content-center w-full h-fit pt-10 lg:pt-0">
       <div
