@@ -9,7 +9,7 @@ import React from "react";
 import * as Yup from "yup";
 
 const FormPinRegister = () => {
-  const { uuid, token } = useAuth();
+  const { token } = useAuth();
   const router = useRouter();
 
   const initialSetPinForm: Otp = {
@@ -37,7 +37,7 @@ const FormPinRegister = () => {
 
     // Init Payload Otp
     let payloadChangePin: SetPinFormInterface = {
-      uuid: uuid,
+      uuid: localStorage.getItem("uuid") || "" as string,
       old_pin: "575824",
       new_pin: generatePayloadPin,
     };
@@ -55,7 +55,6 @@ const FormPinRegister = () => {
         if (res.status !== 200) {
           console.warn(res);
         } else {
-          console.log(res);
           router.push("/dashboard");
         }
       })

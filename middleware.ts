@@ -1,7 +1,7 @@
 import { sessionStatus } from "./lib/session";
 import { NextRequest, NextResponse } from "next/server";
 
-const protectedRoutes = ["/dashboard"];
+const protectedRoutes = ["/dashboard", "/deposit"];
 
 export default function middleware(req: NextRequest) {
 

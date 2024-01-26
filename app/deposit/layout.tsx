@@ -1,15 +1,15 @@
 import Image from "next/image";
 import ProfileSidebar from "../dashboard/components/ProfileSidebar";
 import SettingSidebar from "../dashboard/components/SettingSidebar";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "../dashboard/components/Sidebar";
 import { Metadata } from "next";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import SidebarMobile from "./components/SidebarMobile";
+import SidebarMobile from "../dashboard/components/SidebarMobile";
 
 export const metadata: Metadata = {
-  title: "E-Sewaka | Dashboard",
-  description: "Dashboard Page ",
+  title: "E-Sewaka | Deposit",
+  description: "Deposit Page ",
 };
 
 export default function layout({

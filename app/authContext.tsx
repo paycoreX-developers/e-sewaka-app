@@ -11,6 +11,8 @@ import {
 interface CcontextProps {
   uuid: string;
   setUuid: Dispatch<SetStateAction<string>>;
+  phone: string;
+  setPhone: Dispatch<SetStateAction<string>>;
   profile: any;
   setProfile: any;
   token: string;
@@ -26,6 +28,8 @@ const AuthContext = createContext<CcontextProps>({
   setUuid: (): string => "",
   token: "",
   setToken: (): string => "",
+  phone: "",
+  setPhone: (): string => "",
   profile: {},
   setProfile: () => {},
 });
@@ -34,22 +38,22 @@ const AuthContextProvider = ({ children }: RootLayoutProps) => {
   const [uuid, setUuid] = useState<string>("");
   const [profile, setProfile] = useState<any>();
   const [token, setToken] = useState("");
+  const [phone, setPhone] = useState<string>("");
 
   const checkAuthStatus = () => {
     try {
       let uuid__ = window.localStorage.getItem("uuid") || "";
       let token__ = window.localStorage.getItem("x_access_token") || "";
       let profile__ = window.localStorage.getItem("profile") || "";
+      let phone__ = window.localStorage.getItem("phone") || "";
 
       if (uuid__ || token__) {
         setUuid(uuid__);
         setToken(token__);
+        setPhone(phone__);
         setProfile(JSON.parse(profile__));
-      } else {
       }
-    } catch (error) {
-      console.error("Error Context");
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -58,7 +62,16 @@ const AuthContextProvider = ({ children }: RootLayoutProps) => {
 
   return (
     <AuthContext.Provider
-      value={{ uuid, setUuid, profile, setProfile, setToken, token }}
+      value={{
+        uuid,
+        setUuid,
+        profile,
+        setProfile,
+        setToken,
+        token,
+        phone,
+        setPhone,
+      }}
     >
       {children}
     </AuthContext.Provider>

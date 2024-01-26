@@ -9,6 +9,8 @@ export default function page() {
           alt="Logo BSM"
           width={0}
           height={0}
+          loading="lazy"
+          title="BSM"
           sizes="100%"
           src={"/assets/logo/Logo_BSM_colored.png"}
           className="w-1/3 mb-5"

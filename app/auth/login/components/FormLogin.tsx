@@ -5,16 +5,13 @@ import { LoginFormInterface } from "@/utils/authTypes";
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import Link from "next/link";
-import React, { useId, useState } from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
-// import { useLocalStorage } from "@uidotdev/usehooks";
 import FormOtp from "./FormOtp";
-import { cookies } from "next/headers";
+import { v4 as uuidv4 } from "uuid";
 
 const FormLogin = () => {
   const [toOtp, setToOtp] = useState<boolean>(false);
-  // const [phonePresist, setPhonePresist] = useLocalStorage<string>("phone", "");
-  // const [uuidPresist, setuuidPresist] = useLocalStorage<string>("uuid", "");
 
   // Validation
   const Login = Yup.object().shape({
@@ -27,7 +24,7 @@ const FormLogin = () => {
   };
 
   // Generate uuid
-  const id = useId();
+  const id = uuidv4();
 
   const loginByOtpHandler = async (val: any) => {
     let payload: LoginFormInterface = {
@@ -52,7 +49,7 @@ const FormLogin = () => {
           setToOtp(true);
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {});
   };
 
   return (
