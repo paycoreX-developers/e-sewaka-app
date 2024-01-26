@@ -9,7 +9,8 @@ import dayjs from "dayjs";
 import axios from "axios";
 import DataTable from "react-data-table-component";
 import { currencyHelper } from "@/utils/helper";
-import 'react-datepicker/dist/react-datepicker.css'
+import "react-datepicker/dist/react-datepicker.css";
+import { useAuth } from "@/app/authContext";
 
 export const columns = [
   {
@@ -52,10 +53,12 @@ const FilterTab: React.FC = () => {
   const [histories, setHistories] = useState([]);
   const [error, setError] = useState<boolean>(false);
 
+  const { uuid, token } = useAuth();
+
   const initialValuess = {
     date_start: new Date(),
     date_end: new Date(),
-    uuid: window.localStorage.getItem("uuid") || "",
+    uuid: uuid,
     row_start: "0",
     is_summary: "1",
   };
@@ -75,7 +78,7 @@ const FilterTab: React.FC = () => {
       url: "/api/apps/balance/deposit_history",
       method: "POST",
       headers: {
-        x_access_token: window.localStorage.getItem("token") || "",
+        x_access_token: token,
         "Content-Type": "application/JSON",
       },
       data: JSON.stringify(payload),
