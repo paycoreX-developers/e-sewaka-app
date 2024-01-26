@@ -21,7 +21,7 @@ const SettingSidebar: React.FC = () => {
         <DropdownMenuLabel>Preferences</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="hover:bg-neutral-500 hover:text-white">
-          <Link href="/e-kyc" className="block w-full">
+          <Link href="/settings/e-kyc" className="block w-full">
             EKYC
           </Link>
         </DropdownMenuItem>
