@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth } from "@/app/authContext";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,18 +20,17 @@ import React, { useEffect, useState } from "react";
 
 const BankList = () => {
   const [bankLists, setBankLists] = useState<BankList[]>([]);
-  const { token, uuid } = useAuth();
 
   const getBankLists = async () => {
     let payload = {
-      uuid: uuid,
+      uuid: window.localStorage.getItem("uuid") || "",
     };
 
     await axios({
       url: "/api/apps/product/bank_list",
       method: "POST",
       headers: {
-        x_access_token: token,
+        x_access_token: window.localStorage.getItem("x_access_token") || "",
         "Content-Type": "application/JSON",
       },
       data: JSON.stringify(payload),
@@ -41,7 +39,7 @@ const BankList = () => {
 
   const topUpHandler = async (data: any) => {
     let payload = {
-      uuid: uuid,
+      uuid: window.localStorage.getItem("uuid") || "",
       bank: data.bank,
       value: data.ammount + "000",
     };
@@ -50,7 +48,7 @@ const BankList = () => {
       url: "/api/apps/balance/topup",
       method: "POST",
       headers: {
-        x_access_token: token,
+        x_access_token: window.localStorage.getItem("x_access_token") || "",
         "Content-Type": "application/JSON",
       },
       data: JSON.stringify(payload),
@@ -83,7 +81,7 @@ const BankList = () => {
             value="tf"
             defaultChecked
           >
-            <img src="/assets/auth/SVG.png" alt="" />
+            <img src="/assets/logo/TF.svg" alt="" />
             Transfer
           </TabsTrigger>
           <TabsTrigger
@@ -91,7 +89,7 @@ const BankList = () => {
             disabled
             value="va"
           >
-            <img src="/assets/auth/SVG.svg" alt="" />
+            <img src="/assets/logo/SVG.svg" alt="" />
             Virtual
             <br /> Account
           </TabsTrigger>
@@ -100,7 +98,7 @@ const BankList = () => {
             disabled
             value="merchant"
           >
-            <img src="/assets/auth/SVG2.svg" alt="" />
+            <img src="/assets/logo/SVG2.svg" alt="" />
             Merchant
           </TabsTrigger>
           <TabsTrigger
@@ -108,7 +106,7 @@ const BankList = () => {
             disabled
             value="merchant"
           >
-            <img src="/assets/auth/SVG3.svg" alt="" />
+            <img src="/assets/logo/SVG3.svg" alt="" />
             E-Wallet
           </TabsTrigger>
           <TabsTrigger
@@ -116,7 +114,7 @@ const BankList = () => {
             disabled
             value="merchant"
           >
-            <img src="/assets/auth/QRIS.svg.svg" alt="" />
+            <img src="/assets/logo/QRIS.svg.svg" alt="" />
             QRIS
           </TabsTrigger>
         </TabsList>
@@ -144,7 +142,7 @@ const BankList = () => {
                       className="py-6 w-full flex flex-col gap-2 border-[1px] rounded-2xl"
                     >
                       <img
-                        src={`/assets/auth/${bank.bank_code.toLocaleLowerCase()}.svg`}
+                        src={`/assets/logo/${bank.bank_code.toLocaleLowerCase()}.svg`}
                         alt=""
                       />
                       <span className="hidden lg:block">{bank.bank_name}</span>
@@ -186,7 +184,7 @@ const BankList = () => {
                             <AlertDialogDescription>
                               Top up via{" "}
                               <img
-                                src={`/assets/auth/${bank.bank_code.toLocaleLowerCase()}.svg`}
+                                src={`/assets/logo/${bank.bank_code.toLocaleLowerCase()}.svg`}
                                 alt=""
                                 className="my-3"
                               />
@@ -222,7 +220,7 @@ const BankList = () => {
                             <AlertDialogDescription>
                               Top up via{" "}
                               <img
-                                src={`/assets/auth/${bank.bank_code.toLocaleLowerCase()}.svg`}
+                                src={`/assets/logo/${bank.bank_code.toLocaleLowerCase()}.svg`}
                                 alt=""
                                 className="my-3"
                               />
@@ -258,7 +256,7 @@ const BankList = () => {
                             <AlertDialogDescription>
                               Top up via{" "}
                               <img
-                                src={`/assets/auth/${bank.bank_code.toLocaleLowerCase()}.svg`}
+                                src={`/assets/logo/${bank.bank_code.toLocaleLowerCase()}.svg`}
                                 alt=""
                                 className="my-3"
                               />
@@ -294,7 +292,7 @@ const BankList = () => {
                             <AlertDialogDescription>
                               Top up via{" "}
                               <img
-                                src={`/assets/auth/${bank.bank_code.toLocaleLowerCase()}.svg`}
+                                src={`/assets/logo/${bank.bank_code.toLocaleLowerCase()}.svg`}
                                 alt=""
                                 className="my-3"
                               />
@@ -330,7 +328,7 @@ const BankList = () => {
                             <AlertDialogDescription>
                               Top up via{" "}
                               <img
-                                src={`/assets/auth/${bank.bank_code.toLocaleLowerCase()}.svg`}
+                                src={`/assets/logo/${bank.bank_code.toLocaleLowerCase()}.svg`}
                                 alt=""
                                 className="my-3"
                               />
@@ -366,7 +364,7 @@ const BankList = () => {
                             <AlertDialogDescription>
                               Top up via{" "}
                               <img
-                                src={`/assets/auth/${bank.bank_code.toLocaleLowerCase()}.svg`}
+                                src={`/assets/logo/${bank.bank_code.toLocaleLowerCase()}.svg`}
                                 alt=""
                                 className="my-3"
                               />

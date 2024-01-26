@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
 import { AuthContextProvider } from "./authContext";
 
 const inter = Plus_Jakarta_Sans({ subsets: ["latin"] });
