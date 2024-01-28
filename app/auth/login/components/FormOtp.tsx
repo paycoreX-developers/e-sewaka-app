@@ -7,11 +7,11 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
-import { useAuth } from "@/app/authContext";
 
 const FormOtp: React.FC = () => {
+  const [load, setLoad] = useState<boolean>(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -92,6 +92,7 @@ const FormOtp: React.FC = () => {
               res.data.x_access_token
             }; path=/; max-age=${now.toUTCString()};`;
           } catch (error) {}
+          setLoad(true);
           getProfileHandler(res.data.x_access_token);
           router.push("/dashboard");
         }
@@ -235,10 +236,10 @@ const FormOtp: React.FC = () => {
           <Button
             type="submit"
             variant="default"
-            // disabled={loading}
+            disabled={load}
             className="w-full bg-blue-700 text-white py-2 px-4 rounded-full"
           >
-            Verify
+            {load ? "Loading" : "Verify"}
           </Button>
         </div>
       </Form>
