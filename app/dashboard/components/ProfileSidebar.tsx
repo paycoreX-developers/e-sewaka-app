@@ -27,7 +27,7 @@ import { useRouter } from "next/navigation";
 const ProfileSidebar: React.FC = () => {
   const router = useRouter();
 
-  const { uuid, token, setToken, profile, setProfile } = useAuth();
+  const { uuid, token, profile, setProfile } = useAuth();
 
   // Handler for Logout
   const handlerLogout = async () => {
@@ -49,6 +49,7 @@ const ProfileSidebar: React.FC = () => {
             window.localStorage.setItem("x_access_token", "");
             window.localStorage.setItem("uuid", "");
             window.localStorage.setItem("phone", "");
+            document.cookie = `token=; path=/; expires= Thu, 21 Aug 2014 20:00:00 UTC;`;
           } catch (error) {}
           //set on useContext
 
@@ -66,12 +67,11 @@ const ProfileSidebar: React.FC = () => {
         <DropdownMenuTrigger className="w-full text-white flex items-center gap-5">
           <Avatar>
             <AvatarFallback className="text-blue-700 text-xl ">
-              AA
-              {/* <img
-                src={profile ? profile.img_url : imageProfile}
+              <img
+                src={profile ? profile?.img_url : ""}
                 alt=""
                 className="w-full h-full object-cover object-center"
-              /> */}
+              />
             </AvatarFallback>
           </Avatar>
           <div className="flex flex-col items-start">
