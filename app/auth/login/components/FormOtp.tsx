@@ -83,8 +83,14 @@ const FormOtp: React.FC = () => {
         } else {
           try {
             localStorage.setItem("x_access_token", res.data.x_access_token);
-            // set token on cookie
-            document.cookie = `token=${res.data.x_access_token}; path=/;`;
+            // set token on cookie with lifetiem 1 year
+            let now = new Date();
+            let time = now.getTime();
+            let expireTime = time + 365 * 60 * 60;
+            now.setTime(expireTime);
+            document.cookie = `token=${
+              res.data.x_access_token
+            }; path=/; max-age=${now.toUTCString()};`;
           } catch (error) {}
           getProfileHandler(res.data.x_access_token);
           router.push("/dashboard");
