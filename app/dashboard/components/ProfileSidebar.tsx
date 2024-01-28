@@ -67,15 +67,11 @@ const ProfileSidebar: React.FC = () => {
         <DropdownMenuTrigger className="w-full text-white flex items-center gap-5">
           <Avatar>
             <AvatarFallback className="text-blue-700 text-xl ">
-              {profile?.img_url ? (
-                <img
-                  src={profile && profile?.img_url}
-                  alt=""
-                  className="w-full h-full object-cover object-center"
-                />
-              ) : (
-                profile?.full_name.charAt(0)
-              )}
+              <img
+                src={profile ? profile?.img_url : ""}
+                alt=""
+                className="w-full h-full object-cover object-center"
+              />
             </AvatarFallback>
           </Avatar>
           <div className="flex flex-col items-start">
